@@ -5,9 +5,11 @@ import {
   ButtonGroup,
   Checkbox,
   FormControlLabel,
+  TextField,
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+
 
 function CheckboxExample() {
   const [checked, setChecked] = useState(true);
@@ -31,20 +33,30 @@ function App() {
   return (
     <div className='App'>
       <header>React Material UI Tutorial</header>
-      <CheckboxExample></CheckboxExample>
+      <div>
+        <TextField
+          variant='filled'
+          color='secondary'
+          type='email'
+          label="Your Email"
+          placeholder='you@youremail.com'/>
+      </div>
+      <div>
+        <CheckboxExample></CheckboxExample>
+      </div>
       <ButtonGroup variant='contained' color='primary'>
         <Button
           startIcon={<SaveIcon />}
           onClick={() => alert('saved')}
           size='large'
-        >
+          >
           Save
         </Button>
         <Button
           startIcon={<DeleteIcon />}
           onClick={() => alert('deleted')}
           size='large'
-        >
+          >
           Discard
         </Button>
       </ButtonGroup>
