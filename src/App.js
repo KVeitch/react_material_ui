@@ -6,25 +6,42 @@ import {
   Checkbox,
   FormControlLabel,
   TextField,
-  makeStyles,
 } from '@material-ui/core';
+import {
+  makeStyles, ThemeProvider, createMuiTheme,
+} from '@material-ui/core/styles';
+import {orange, green} from '@material-ui/core/colors';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
-  root: {
-    background: 'linear-gradient(45deg, #333, #999)',
+  btnRoot: {
+    background: 'linear-gradient(45deg, #FE688B, #FF8E53)',
     border: 0,
     borderRadius: 15,
     color: 'white',
-    paddong: '0 30px',
+    padding: '0 30px',
+    margin:  '2em 0',
+    fontSize:'1.5em'
   },
 });
 
+const theme = createMuiTheme(
+  {
+    palette:{
+      primary:{
+        main:green[400]
+      },
+      secondary:{
+        main:orange[400]
+      }
+    }
+  }
+)
+
 function ButtonStyled() {
   const classes = useStyles();
-  return <Button className={classes.root}>Styled Button</Button>;
+  return <Button className={classes.btnRoot}>Styled Button</Button>;
 }
 
 function CheckboxExample() {
@@ -47,38 +64,40 @@ function CheckboxExample() {
 
 function App() {
   return (
-    <div className='App'>
-      <header>React Material UI Tutorial</header>
-      <ButtonStyled />
-      <div>
-        <TextField
-          variant='filled'
-          color='secondary'
-          type='email'
-          label='Your Email'
-          placeholder='you@youremail.com'
-        />
+    <ThemeProvider theme={theme}>
+      <div className='App'>
+        <header>React Material UI Tutorial</header>
+        <ButtonStyled />
+        <div>
+          <TextField
+            variant='filled'
+            color='secondary'
+            type='email'
+            label='Your Email'
+            placeholder='you@youremail.com'
+            />
+        </div>
+        <div>
+          <CheckboxExample></CheckboxExample>
+        </div>
+        <ButtonGroup variant='contained' color='primary'>
+          <Button
+            startIcon={<SaveIcon />}
+            onClick={() => alert('saved')}
+            size='large'
+            >
+            Save
+          </Button>
+          <Button
+            startIcon={<DeleteIcon />}
+            onClick={() => alert('deleted')}
+            size='large'
+            >
+            Discard
+          </Button>
+        </ButtonGroup>
       </div>
-      <div>
-        <CheckboxExample></CheckboxExample>
-      </div>
-      <ButtonGroup variant='contained' color='primary'>
-        <Button
-          startIcon={<SaveIcon />}
-          onClick={() => alert('saved')}
-          size='large'
-        >
-          Save
-        </Button>
-        <Button
-          startIcon={<DeleteIcon />}
-          onClick={() => alert('deleted')}
-          size='large'
-        >
-          Discard
-        </Button>
-      </ButtonGroup>
-    </div>
+    </ThemeProvider>
   );
 }
 
